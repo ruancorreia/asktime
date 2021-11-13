@@ -5,15 +5,15 @@ const path = require("path");
 const routes = require("./src/routes/index")
 const bodyParser = require("body-parser");
 const connection = require("./src/database/database");
-
+const Pergunta = require("./src/database/Pergunta");
 
 /* 
 Conexao ao banco de dados
 
 1- conexao
 2- autenticacao
-3 - condicional positiva
-4 - condicional negativa
+3- condicional positiva
+4- condicional negativa
 */
    
     connection
@@ -22,7 +22,7 @@ Conexao ao banco de dados
             console.log("Sucessful Connection!");
         })
         .catch((msgErro)=>{
-            console.log(msgErro)
+            console.log(msgErro) 
         })
 
 //porta
@@ -43,9 +43,18 @@ app.use(express.static(path.resolve('src', 'public')));
 app.use(routes);
 
 app.post("/salvarpergunta", (req, res)=>{
+    
+    //recebo os dados do formulario e armazeno em variaveis 
     var titulo = req.body.titulo;
     var descricao = req.body.descricao;
-    res.send("Formulario enviado!" + "Titulo: "+ titulo + " Descrição: " + descricao)
+
+    //depois eu salvo esse formulario no banco de dados, passando os dados que vem do formulario 
+    Pergunta.create({
+        titulo:titulo,
+        descricao:descricao // se tudo ocorrer bem, vai pro .then e redireciona pra pagina inicial
+    }).then(()=>{
+        res.redirect("/")
+    });
 });
 
 
