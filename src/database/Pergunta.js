@@ -12,7 +12,7 @@ const Pergunta = connection.define("pergunta",{
     }
 });
 
-Pergunta.sync({force: false}).then(()=>{
+Pergunta.sync({force: false}).then(()=>{        //  msgn para confirmação de criação do banco de dados 
     console.log("Tabela Criada!")
 })
 

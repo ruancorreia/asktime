@@ -49,7 +49,7 @@ app.post("/salvarpergunta", (req, res)=>{
     var titulo = req.body.titulo;
     var descricao = req.body.descricao;
 
-    //depois eu salvo esse formulario no banco de dados, passando os dados que vem do formulario 
+    //Metodo responsavel por salvar uma pergunta no banco de dados
     Pergunta.create({
         titulo:titulo,
         descricao:descricao // se tudo ocorrer bem, vai pro .then e redireciona pra pagina inicial
